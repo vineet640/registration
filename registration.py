@@ -16,7 +16,6 @@ UT EID 1: vsb433
 UT EID 2: ac84787
 """
 
-# TODO: Delete this import if you choose not to use it. Delete this comment when you are done.
 import sys
 
 
@@ -361,7 +360,6 @@ class Graph:
         return vertices
 
 
-    # TODO: Modify this method. You may delete this comment when you are done.
     def compute_depth(self):
         """Computes depth for each vertex in the graph."""
         h = [[] for _ in range(len(self.vertices))]
@@ -383,7 +381,6 @@ class Graph:
                 if k[v] == 0:
                     queue.append(v)
 
-    # TODO: Modify this method. You may delete this comment when you are done.
     def has_cycle(self):
         """
         Determine whether or not the graph has a cycle.
@@ -414,7 +411,6 @@ class Graph:
         return False
 
 
-    # TODO: Modify this method. You may delete this comment when you are done.
     def get_registration_plan(self):
         """
         Return a valid ordering of courses to take for registration as a 2D
@@ -426,40 +422,39 @@ class Graph:
         courses = []
         n = len(self.vertices)
         indeg = [0] * n
-        
+
         for u in range(n):
             for v in range(n):
                 if self.adjacency_matrix[u][v] == 1:
                     indeg[v] += 1
-                    
+
         aval = []
-        
+
         for i in range(n):
             if indeg[i] == 0:
                 aval.append(i)
-                
+
         while aval:
             aval.sort(key=lambda x:(-self.vertices[x].depth, self.vertices[x].label))
-            
+
             sem = []
             aval2 = []
-            
-            for _ in range(min(4, len(ava))):
+
+            for _ in range(min(4, len(aval))):
                 u = aval.pop(0)
                 sem.append(self.vertices[u].label)
-                
+
                 for v in self.get_adjacent_vertices(u):
                     indeg[v] -= 1
                     if indeg[v] == 0:
                         aval2.append(v)
-                        
-                courses.append(sem)
-                aval.extend(aval2)
+
+            courses.append(sem)
+            aval.extend(aval2)
 
         return courses
 
 
-# TODO: Modify this function. You may delete this comment when you are done.
 def main():
     """
     The main function to retrieve a registration plan.
@@ -470,17 +465,17 @@ def main():
     graph = Graph()
 
     # read the number of vertices
-    verticies_count = int(sys.stdin.readLine())
+    verticies_count = int(sys.stdin.readline())
 
     # read the vertices and add them into the graph
-    for _ in range(num_vertices):
-        label = sys.stdin.readLine().strip()
+    for _ in range(verticies_count):
+        label = sys.stdin.readline().strip()
         graph.add_vertex(label)
     # read the number of edges
-    edgescount = int(sys.stdin.readLine())
+    edgescount = int(sys.stdin.readline())
     # read the edges and insert them into the graph
     for _ in range(edgescount):
-        line = sys.stdin.readLine().strip()
+        line = sys.stdin.readline().strip()
         if line == "":
             continue
         startlabel, endlabel = line.split()
